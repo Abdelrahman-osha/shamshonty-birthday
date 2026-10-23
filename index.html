@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shamshon's Game ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-pink: #ff6584;
+            --deep-purple: #6c5ce7;
+            --soft-purple: #a29bfe;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-color: #2d3436;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9aef 0%, #fad0c4 50%, #a1c4fd 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 650px;
+            width: 90%;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+            z-index: 10;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .container.final-screen-container {
+            max-width: 950px !important;
+            padding: 40px !important;
+        }
+
+        h1 {
+            color: #d63031;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #2d3436;
+            font-weight: 600;
+        }
+
+        .special-highlight-text {
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 900 !important;
+            font-size: 1.5rem !important;
+            color: #d63031 !important;
+            line-height: 1.7 !important;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .login-note-box {
+            background: rgba(255, 105, 180, 0.12);
+            border: 2px dashed var(--primary-pink);
+            padding: 12px 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 900;
+            font-size: 1.05rem;
+            color: #d63031;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        input[type="text"], input[type="password"], input[type="number"] {
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            border: 2px solid var(--soft-purple);
+            border-radius: 12px;
+            margin-top: 15px;
+            width: 70%;
+            outline: none;
+            text-align: center;
+        }
+
+        button {
+            background: linear-gradient(135deg, #e84393, #6c5ce7);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 67, 147, 0.6);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .img-preview {
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .puzzle-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            width: 330px;
+            height: 330px;
+            margin: 20px auto;
+            background: #dfe6e9;
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .puzzle-piece {
+            background-size: 330px 330px;
+            cursor: pointer;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+
+        .puzzle-piece:hover {
+            transform: scale(0.96);
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .typing-birthday-line {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.3rem;
+            color: #e84393;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            min-height: 50px;
+            display: block;
+        }
+
+        .final-message-box {
+            background: rgba(255, 255, 255, 0.92);
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 3px solid rgba(255, 105, 180, 0.4);
+            opacity: 0;
+            transform: scale(0.7) translateY(30px);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .final-message-box.show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .massive-floating-heart {
+            position: fixed;
+            color: #ff4757;
+            font-size: 2.5rem;
+            user-select: none;
+            pointer-events: none;
+            z-index: 999;
+            animation: massivePopAndFall 1.6s ease-in-out forwards;
+        }
+
+        @keyframes massivePopAndFall {
+            0% {
+                transform: translateY(105vh) scale(0.3);
+                opacity: 0;
+            }
+            35% {
+                transform: translateY(20vh) scale(1.6);
+                opacity: 1;
+            }
+            70% {
+                transform: translateY(40vh) scale(1.3);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) scale(0.9);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container" id="game-container">
+        <!-- شاشة تسجيل الدخول -->
+        <div id="screen-login">
+            <div class="login-note-box">
+                Note :> it was never just a song to me ✨
+            </div>
+            <h1>login</h1>
+            <input type="text" id="login-user" placeholder="Username" onfocus="startMusic()"><br>
+            <input type="password" id="login-pass" placeholder="Password" onfocus="startMusic()"><br>
+            <button onclick="startMusic(); checkLogin();">Login</button>
+            <p id="login-feedback" class="feedback"></p>
+        </div>
+
+        <!-- شاشة البداية -->
+        <div id="screen-start" class="hidden">
+            <h1>HI shamshon</h1>
+            <p>Press Start if you are ready</p>
+            <button onclick="directTransition(1)">start</button>
+        </div>
+
+        <!-- المرحلة الأولى: الماث -->
+        <div id="screen-math" class="hidden">
+            <h1>Math Stage 🧮</h1>
+            <p>What is the result?</p>
+            <p style="font-size: 1.8rem; color: #6c5ce7;">6 + 4 = ?</p>
+            <input type="number" id="math-answer" placeholder="Enter answer">
+            <br>
+            <button onclick="checkMath()">Submit</button>
+            <p id="math-feedback" class="feedback"></p>
+        </div>
+
+        <!-- رسالة الماث -->
+        <div id="screen-math-msg" class="hidden">
+            <p class="special-highlight-text">سهلة علشان شمشمون مش بتحب الماث</p>
+            <button onclick="directTransition(3)">next</button>
+        </div>
+
+        <!-- المرحلة الثانية -->
+        <div id="screen-q2" class="hidden">
+            <h1>Shamshon Question 🔍</h1>
+            <img src="q2.jpg" alt="Shamshon" class="img-preview" onerror="this.src='https://via.placeholder.com/300?text=q2.jpg+Missing'">
+            <p>How many Shamshons are there?</p>
+            <input type="number" id="q2-answer" placeholder="Enter number">
+            <br>
+            <button onclick="checkQ2()">Submit</button>
+            <p id="q2-feedback" class="feedback"></p>
+        </div>
+
+        <!-- رسالة وسيطة -->
+        <div id="screen-msg2" class="hidden">
+            <p class="special-highlight-text">In real life there is only 1 ❤️</p>
+            <button onclick="startPuzzlePhase(1)">next</button>
+        </div>
+
+        <!-- مراحل البازل -->
+        <div id="screen-puzzle" class="hidden">
+            <h1 id="puzzle-title">Puzzle Stage</h1>
+            <p style="font-size: 0.95rem; color: #636e72;">Click on any two pieces to swap them until the picture is complete!</p>
+            <div class="puzzle-board" id="puzzle-board"></div>
+            <button onclick="checkPuzzle()">Submit Puzzle ✅</button>
+            <p id="puzzle-feedback" class="feedback"></p>
+        </div>
+
+        <!-- شاشة النهاية -->
+        <div id="screen-final" class="hidden">
+            <div id="final-msg-box" class="final-message-box">
+                <div id="typed-bday-line" class="typing-birthday-line"></div>
+                <p class="special-highlight-text" style="font-size: 1.35rem !important; text-align: center; margin: 0; color: #2d3436; line-height: 1.8;">
+                    You gathered the puzzle pictures of [ SHAMSHONTY ] where she was happy in them, so know that you deserve to be happy and well always, and know that I will always wish you absolute happiness—because my [ SHAMSHONTY ] deserves love ✨
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CONFIG = {
+            correctUser: "shamshon",
+            correctPass: "16/4/2026",
+            mathAnswer: 10,
+            q2Answer: 9,
+            puzzleImages: ["puzzle1.jpg", "puzzle2.jpg", "puzzle3.jpg"]
+        };
+
+        let currentStep = 0;
+        let currentPuzzleIndex = 0;
+        let puzzlePiecesOrder = [];
+        let originalOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        let musicStarted = false;
+
+        function startMusic() {
+            if (!musicStarted) {
+                const music = document.getElementById('bg-music');
+                music.play().then(() => {
+                    musicStarted = true;
+                }).catch(error => {
+                    console.log("Audio waiting for interaction", error);
+                });
+            }
+        }
+
+        function checkLogin() {
+            const userInput = document.getElementById('login-user').value.trim();
+            const passInput = document.getElementById('login-pass').value.trim();
+            const feedback = document.getElementById('login-feedback');
+
+            if (userInput === CONFIG.correctUser && passInput === CONFIG.correctPass) {
+                hideAllScreens();
+                document.getElementById('screen-start').classList.remove('hidden');
+            } else {
+                feedback.style.color = "red";
+                feedback.innerText = "Wrong password! 😡";
+            }
+        }
+
+        function triggerMassiveHearts(callback) {
+            const symbols = ['❤️', '💖', '💗', '💓', '💕', '💘', '✨'];
+
+            for (let i = 0; i < 90; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'massive-floating-heart';
+                    heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                    heart.style.left = Math.random() * 98 + 'vw';
+                    heart.style.fontSize = (Math.random() * 2 + 1.2) + 'rem';
+                    heart.style.animationDuration = (Math.random() * 0.5 + 1.1) + 's';
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 1600);
+                }, i * 12);
+            }
+
+            const container = document.getElementById('game-container');
+            container.style.opacity = '0';
+            container.style.transform = 'scale(0.85)';
+
+            setTimeout(() => {
+                callback();
+                container.style.opacity = '1';
+                container.style.transform = 'scale(1)';
+            }, 800);
+        }
+
+        function hideAllScreens() {
+            document.querySelectorAll('.container > div').forEach(el => el.classList.add('hidden'));
+            document.getElementById('game-container').classList.remove('final-screen-container');
+        }
+
+        function directTransition(stepNum) {
+            hideAllScreens();
+            currentStep = stepNum;
+
+            if (currentStep === 1) {
+                document.getElementById('screen-math').classList.remove('hidden');
+            } else if (currentStep === 3) {
+                document.getElementById('screen-q2').classList.remove('hidden');
+            }
+        }
+
+        function checkMath() {
+            const val = parseInt(document.getElementById('math-answer').value);
+            const feedback = document.getElementById('math-feedback');
+
+            if (val === CONFIG.mathAnswer) {
+                feedback.style.color = "green";
+                feedback.innerText = "Correct! ✨";
+
+                setTimeout(() => {
+                    triggerMassiveHearts(() => {
+                        hideAllScreens();
+                        currentStep = 2;
+                        document.getElementById('screen-math-msg').classList.remove('hidden');
+                    });
+                }, 600);
+            } else {
+                feedback.style.color = "red";
+                feedback.innerText = "Wrong answer, try again! 😡";
+            }
+        }
+
+        function checkQ2() {
+            const val = parseInt(document.getElementById('q2-answer').value);
+            const feedback = document.getElementById('q2-feedback');
+
+            if (val === CONFIG.q2Answer) {
+                triggerMassiveHearts(() => {
+                    hideAllScreens();
+                    document.getElementById('screen-msg2').classList.remove('hidden');
+                });
+            } else {
+                feedback.style.color = "red";
+                feedback.innerText = "rakzy ya shamshon 😡";
+            }
+        }
+
+        function startPuzzlePhase(index) {
+            currentPuzzleIndex = index - 1;
+
+            if (currentPuzzleIndex >= CONFIG.puzzleImages.length) {
+                triggerMassiveHearts(() => {
+                    hideAllScreens();
+                    document.getElementById('game-container').classList.add('final-screen-container');
+                    document.getElementById('screen-final').classList.remove('hidden');
+
+                    const msgBox = document.getElementById('final-msg-box');
+                    msgBox.classList.add('show');
+
+                    setTimeout(() => {
+                        playBirthdayTypingEffect();
+                    }, 600);
+                });
+                return;
+            }
+
+            triggerMassiveHearts(() => {
+                hideAllScreens();
+                document.getElementById('screen-puzzle').classList.remove('hidden');
+                document.getElementById('puzzle-title').innerText = `Puzzle Stage (${currentPuzzleIndex + 1})`;
+                document.getElementById('puzzle-feedback').innerText = "";
+                setupPuzzleBoard();
+            });
+        }
+
+        function playBirthdayTypingEffect() {
+            const textElement = document.getElementById('typed-bday-line');
+            textElement.innerHTML = "";
+
+            const text = "Happiest of Birthdays ❤️";
+            let i = 0;
+
+            function typeWriter() {
+                if (i < text.length) {
+                    textElement.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 90);
+                }
+            }
+
+            typeWriter();
+        }
+
+        function setupPuzzleBoard() {
+            const board = document.getElementById('puzzle-board');
+            board.innerHTML = "";
+
+            puzzlePiecesOrder = [...originalOrder];
+            puzzlePiecesOrder.sort(() => Math.random() - 0.5);
+
+            if (JSON.stringify(puzzlePiecesOrder) === JSON.stringify(originalOrder)) {
+                puzzlePiecesOrder.reverse();
+            }
+
+            const imgUrl = CONFIG.puzzleImages[currentPuzzleIndex];
+
+            puzzlePiecesOrder.forEach((pieceIndex, slotIndex) => {
+                const piece = document.createElement('div');
+                piece.className = 'puzzle-piece';
+                piece.dataset.slot = slotIndex;
+                piece.dataset.piece = pieceIndex;
+
+                const x = (pieceIndex % 3) * 110;
+                const y = Math.floor(pieceIndex / 3) * 110;
+
+                piece.style.backgroundImage = `url('${imgUrl}')`;
+                piece.style.backgroundPosition = `-${x}px -${y}px`;
+                piece.style.backgroundSize = '330px 330px';
+
+                piece.onclick = () => selectPiece(piece);
+                board.appendChild(piece);
+            });
+        }
+
+        let selectedPiece = null;
+
+        function selectPiece(piece) {
+            if (!selectedPiece) {
+                selectedPiece = piece;
+                piece.style.border = "2px dashed #ff6584";
+            } else {
+                let tempBg = selectedPiece.style.backgroundPosition;
+                let tempPieceVal = selectedPiece.dataset.piece;
+
+                selectedPiece.style.backgroundPosition = piece.style.backgroundPosition;
+                selectedPiece.dataset.piece = piece.dataset.piece;
+
+                piece.style.backgroundPosition = tempBg;
+                piece.dataset.piece = tempPieceVal;
+
+                selectedPiece.style.border = "1px solid #fff";
+                selectedPiece = null;
+            }
+        }
+
+        function checkPuzzle() {
+            const pieces = document.querySelectorAll('.puzzle-piece');
+            let isCorrect = true;
+
+            pieces.forEach(p => {
+                if (parseInt(p.dataset.slot) !== parseInt(p.dataset.piece)) {
+                    isCorrect = false;
+                }
+            });
+
+            const feedback = document.getElementById('puzzle-feedback');
+
+            if (isCorrect) {
+                feedback.style.color = "green";
+                feedback.innerText = "Great job! Puzzle solved 🎯";
+
+                setTimeout(() => {
+                    startPuzzlePhase(currentPuzzleIndex + 2);
+                }, 800);
+            } else {
+                feedback.style.color = "red";
+
+                let wrongMessages = [
+                    "tb graby tany tayb 😡",
+                    "ya shamshonnn 😡",
+                    "el sabr mn andk ya rb 😡"
+                ];
+
+                feedback.innerText = wrongMessages[currentPuzzleIndex];
+            }
+        }
+    </script>
+</body>
+</html>

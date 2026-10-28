@@ -1,234 +1,7 @@
-
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shamshon's Game ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Pacifico&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-pink: #ff6584;
-            --deep-purple: #6c5ce7;
-            --soft-purple: #a29bfe;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --text-color: #2d3436;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ff9aef 0%, #fad0c4 50%, #a1c4fd 100%);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-color);
-            overflow: hidden;
-            position: relative;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            text-align: center;
-            max-width: 650px;
-            width: 90%;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            position: relative;
-            z-index: 10;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .container.final-screen-container {
-            max-width: 950px !important;
-            padding: 40px !important;
-        }
-
-        h1 {
-            color: #d63031;
-            margin-bottom: 20px;
-            font-size: 2.2rem;
-        }
-
-        p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #2d3436;
-            font-weight: 600;
-        }
-
-        .special-highlight-text {
-            font-family: 'Cairo', sans-serif !important;
-            font-weight: 900 !important;
-            font-size: 1.5rem !important;
-            color: #d63031 !important;
-            line-height: 1.7 !important;
-            margin: 15px 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .login-note-box {
-            background: rgba(255, 105, 180, 0.12);
-            border: 2px dashed var(--primary-pink);
-            padding: 12px 15px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 900;
-            font-size: 1.05rem;
-            color: #d63031;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        input[type="text"], input[type="password"], input[type="number"] {
-            padding: 12px 20px;
-            font-size: 1.1rem;
-            border: 2px solid var(--soft-purple);
-            border-radius: 12px;
-            margin-top: 15px;
-            width: 70%;
-            outline: none;
-            text-align: center;
-        }
-
-        button {
-            background: linear-gradient(135deg, #e84393, #6c5ce7);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(232, 67, 147, 0.6);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .img-preview {
-            max-width: 100%;
-            max-height: 250px;
-            border-radius: 15px;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .puzzle-board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4px;
-            width: 330px;
-            height: 330px;
-            margin: 20px auto;
-            background: #dfe6e9;
-            padding: 4px;
-            border-radius: 10px;
-        }
-
-        .puzzle-piece {
-            background-size: 330px 330px;
-            cursor: pointer;
-            border: 1px solid #fff;
-            border-radius: 4px;
-            transition: transform 0.2s;
-        }
-
-        .puzzle-piece:hover {
-            transform: scale(0.96);
-        }
-
-        .feedback {
-            margin-top: 15px;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .typing-birthday-line {
-            font-family: 'Pacifico', cursive;
-            font-size: 2.3rem;
-            color: #e84393;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            min-height: 50px;
-            display: block;
-        }
-
-        .final-message-box {
-            background: rgba(255, 255, 255, 0.92);
-            padding: 35px;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            border: 3px solid rgba(255, 105, 180, 0.4);
-            opacity: 0;
-            transform: scale(0.7) translateY(30px);
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .final-message-box.show {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-
-        .massive-floating-heart {
-            position: fixed;
-            color: #ff4757;
-            font-size: 2.5rem;
-            user-select: none;
-            pointer-events: none;
-            z-index: 999;
-            animation: massivePopAndFall 1.6s ease-in-out forwards;
-        }
-
-        @keyframes massivePopAndFall {
-            0% {
-                transform: translateY(105vh) scale(0.3);
-                opacity: 0;
-            }
-            35% {
-                transform: translateY(20vh) scale(1.6);
-                opacity: 1;
-            }
-            70% {
-                transform: translateY(40vh) scale(1.3);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(110vh) scale(0.9);
-                opacity: 0;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <audio id="bg-music" loop>
-        <source src="song.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="container" id="game-container">
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#f7e7dc"><title>For Shamshonty ♥</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Pacifico&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&display=swap" rel="stylesheet"><link rel="stylesheet" href="./birthday.css"><link rel="stylesheet" href="./cinematic-game.css"></head><body>
+<audio id="bg-music" loop preload="auto"><source src="./song.mp3" type="audio/mpeg"></audio>
+<div id="game-layer">
+<div class="container" id="game-container">
         <!-- شاشة تسجيل الدخول -->
         <div id="screen-login">
             <div class="login-note-box">
@@ -301,258 +74,206 @@
             </div>
         </div>
     </div>
+</div>
+<main class="scene film-scene" id="film-scene" aria-hidden="true">
 
-    <script>
-        const CONFIG = {
-            correctUser: "shamshon",
-            correctPass: "16/4/2026",
-            mathAnswer: 10,
-            q2Answer: 9,
-            puzzleImages: ["puzzle1.jpg", "puzzle2.jpg", "puzzle3.jpg"]
-        };
+    <!-- The tree world (Act 4). One canvas; it stays transparent until the
+         intro hands off, then it draws its own warm sky + blossom tree. -->
+    <canvas id="tree" class="tree" aria-label="A blossom tree grows and blooms into a heart made of petals" role="img"></canvas>
 
-        let currentStep = 0;
-        let currentPuzzleIndex = 0;
-        let puzzlePiecesOrder = [];
-        let originalOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-        let musicStarted = false;
+    <!-- ACT 1 — THE INVITATION ------------------------------------------------
+         A single beating heart on a warm field. It is the only thing the
+         visitor has to do: tap it. Real <button> so it is tappable + keyboard
+         focusable; everything decorative around it is aria-hidden. -->
+    <section class="hero" id="hero" aria-label="Draw the bow to open your card">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__motes" id="motes" aria-hidden="true"></div>
 
-        function startMusic() {
-            if (!musicStarted) {
-                const music = document.getElementById('bg-music');
-                music.play().then(() => {
-                    musicStarted = true;
-                }).catch(error => {
-                    console.log("Audio waiting for interaction", error);
-                });
-            }
-        }
+      <p class="hero__eyebrow" id="eyebrow">a little something, for you</p>
 
-        function checkLogin() {
-            const userInput = document.getElementById('login-user').value.trim();
-            const passInput = document.getElementById('login-pass').value.trim();
-            const feedback = document.getElementById('login-feedback');
+      <!-- THE TARGET — the heart the arrow flies to (GSAP animates .target) -->
+      <div class="targetWrap" aria-hidden="true">
+        <div class="target" id="target">
+          <span class="heart__glow" aria-hidden="true"></span>
+          <span class="target__heart" id="targetHeart">
+            <svg class="heart__svg" viewBox="0 0 100 92" aria-hidden="true">
+              <defs>
+                <radialGradient id="hg" cx="38%" cy="30%" r="80%">
+                  <stop offset="0%"  stop-color="#ffd9e4" />
+                  <stop offset="42%" stop-color="#ff6f97" />
+                  <stop offset="82%" stop-color="#d81e57" />
+                  <stop offset="100%" stop-color="#9d0f3e" />
+                </radialGradient>
+                <linearGradient id="hsheen" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%"  stop-color="rgba(255,255,255,.85)" />
+                  <stop offset="34%" stop-color="rgba(255,255,255,0)" />
+                </linearGradient>
+              </defs>
+              <path d="M50 86.5C26 68 10.5 53.6 10.5 34.6 10.5 20.4 21 11 33.2 11c8.6 0 14.2 4.7 16.8 11.4C52.6 15.7 58.2 11 66.8 11 79 11 89.5 20.4 89.5 34.6 89.5 53.6 74 68 50 86.5Z" fill="url(#hg)" />
+              <path d="M50 86.5C26 68 10.5 53.6 10.5 34.6 10.5 20.4 21 11 33.2 11c8.6 0 14.2 4.7 16.8 11.4C52.6 15.7 58.2 11 66.8 11 79 11 89.5 20.4 89.5 34.6 89.5 53.6 74 68 50 86.5Z" fill="url(#hsheen)" opacity=".7" />
+              <ellipse cx="34" cy="30" rx="8.5" ry="5.4" fill="#fff" opacity=".72" style="mix-blend-mode:screen" />
+            </svg>
+          </span>
+        </div>
+      </div>
 
-            if (userInput === CONFIG.correctUser && passInput === CONFIG.correctPass) {
-                hideAllScreens();
-                document.getElementById('screen-start').classList.remove('hidden');
-            } else {
-                feedback.style.color = "red";
-                feedback.innerText = "Wrong password! 😡";
-            }
-        }
+      <!-- THE BOW + ARROW — draw the string back, release to fire. The rig is
+           placed lower-left and rotated by JS to aim at the heart, so the shot
+           travels on a diagonal. A real control: role=button + keyboard drag. -->
+      <div class="archery" id="archery" role="button" tabindex="0"
+           aria-label="Draw the bow and release to send the arrow to the heart">
 
-        function triggerMassiveHearts(callback) {
-            const symbols = ['❤️', '💖', '💗', '💓', '💕', '💘', '✨'];
+          <!-- aim line, inside the rig so it points straight at the heart -->
+          <div class="aim" id="aim" aria-hidden="true"></div>
 
-            for (let i = 0; i < 90; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'massive-floating-heart';
-                    heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-                    heart.style.left = Math.random() * 98 + 'vw';
-                    heart.style.fontSize = (Math.random() * 2 + 1.2) + 'rem';
-                    heart.style.animationDuration = (Math.random() * 0.5 + 1.1) + 's';
-                    document.body.appendChild(heart);
+          <!-- realistic recurve bow: wooden limbs, leather grip, a live string -->
+          <svg class="bow" id="bow" viewBox="0 0 460 300" aria-hidden="true">
+            <defs>
+              <linearGradient id="limb" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0"   stop-color="#4a2a1a" />
+                <stop offset=".18" stop-color="#6b3f24" />
+                <stop offset=".5"  stop-color="#8a5127" />
+                <stop offset=".82" stop-color="#6b3f24" />
+                <stop offset="1"   stop-color="#4a2a1a" />
+              </linearGradient>
+              <linearGradient id="limbHi" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="rgba(255,214,160,.8)" />
+                <stop offset="1" stop-color="rgba(255,214,160,0)" />
+              </linearGradient>
+              <linearGradient id="grip" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#2a1a10" />
+                <stop offset=".5" stop-color="#5a3822" />
+                <stop offset="1" stop-color="#2a1a10" />
+              </linearGradient>
+            </defs>
+            <!-- limb body (taper faked with two stacked strokes) -->
+            <path class="bow__limb" d="M34 96 C 118 168, 168 240, 230 252 C 292 240, 342 168, 426 96"
+                  fill="none" stroke="url(#limb)" stroke-width="13" stroke-linecap="round" />
+            <path class="bow__limbHi" d="M34 96 C 118 168, 168 240, 230 252 C 292 240, 342 168, 426 96"
+                  fill="none" stroke="url(#limbHi)" stroke-width="3" stroke-linecap="round" opacity=".7" />
+            <!-- recurve tip hooks -->
+            <path d="M34 96 C 22 82, 26 70, 40 66" fill="none" stroke="url(#limb)" stroke-width="8" stroke-linecap="round" />
+            <path d="M426 96 C 438 82, 434 70, 420 66" fill="none" stroke="url(#limb)" stroke-width="8" stroke-linecap="round" />
+            <!-- leather grip over the belly -->
+            <rect x="216" y="206" width="28" height="70" rx="9" fill="url(#grip)" />
+            <path d="M219 220h22 M219 236h22 M219 252h22" stroke="rgba(0,0,0,.35)" stroke-width="2" />
+            <!-- the string: two segments meeting at the nock (JS animates the nock).
+                 A warm taupe so the taut string actually reads against the cream. -->
+            <line class="bow__str" id="strL" x1="40" y1="70" x2="230" y2="96" stroke="#9a8068" stroke-width="2.2" stroke-linecap="round" />
+            <line class="bow__str" id="strR" x1="420" y1="70" x2="230" y2="96" stroke="#9a8068" stroke-width="2.2" stroke-linecap="round" />
+            <circle class="bow__serving" id="serving" cx="230" cy="96" r="4.5" fill="#6f5137" />
+          </svg>
 
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 1600);
-                }, i * 12);
-            }
+          <!-- the arrow: winged golden heart tip (Cupid), gold feather fletching -->
+          <svg class="arrow" id="arrow" viewBox="0 0 64 220" aria-hidden="true">
+            <defs>
+              <linearGradient id="shaft" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#4a2c14" />
+                <stop offset=".5" stop-color="#8a5a2c" />
+                <stop offset="1" stop-color="#3e2410" />
+              </linearGradient>
+              <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ffe38c" />
+                <stop offset=".45" stop-color="#f4a626" />
+                <stop offset="1" stop-color="#a85f0e" />
+              </linearGradient>
+              <linearGradient id="feath" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ff7f9c" />
+                <stop offset=".5" stop-color="#e6396a" />
+                <stop offset="1" stop-color="#a8154a" />
+              </linearGradient>
+              <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffffff" />
+                <stop offset="1" stop-color="#ffe0c4" />
+              </linearGradient>
+            </defs>
 
-            const container = document.getElementById('game-container');
-            container.style.opacity = '0';
-            container.style.transform = 'scale(0.85)';
+            <!-- shaft (dark wood so it reads against the cream) -->
+            <rect x="29.4" y="30" width="5.2" height="168" rx="2.6" fill="url(#shaft)" />
 
-            setTimeout(() => {
-                callback();
-                container.style.opacity = '1';
-                container.style.transform = 'scale(1)';
-            }, 800);
-        }
+            <!-- angel wings flanking the heart tip -->
+            <g class="arrow__wings">
+              <path class="wingL" d="M31 30 C 10 16, 2 20, 4 34 C 12 30, 20 32, 31 40 Z" fill="url(#wing)" stroke="rgba(196,132,58,.72)" stroke-width="1.2"/>
+              <path class="wingR" d="M33 30 C 54 16, 62 20, 60 34 C 52 30, 44 32, 33 40 Z" fill="url(#wing)" stroke="rgba(196,132,58,.72)" stroke-width="1.2"/>
+            </g>
 
-        function hideAllScreens() {
-            document.querySelectorAll('.container > div').forEach(el => el.classList.add('hidden'));
-            document.getElementById('game-container').classList.remove('final-screen-container');
-        }
+            <!-- golden heart arrowhead (Cupid's love arrow) -->
+            <path class="arrow__head" d="M32 12 C 30 7, 22 6.5, 21.5 13 C 21 18, 27 22, 32 27 C 37 22, 43 18, 42.5 13 C 42 6.5, 34 7, 32 12 Z" fill="url(#gold)" stroke="#a5701a" stroke-width=".8" />
+            <ellipse cx="27" cy="13" rx="2.6" ry="1.7" fill="#fff" opacity=".8" style="mix-blend-mode:screen" />
 
-        function directTransition(stepNum) {
-            hideAllScreens();
-            currentStep = stepNum;
+            <!-- gold feather fletching -->
+            <g class="arrow__fletch">
+              <path d="M32 150 C 16 156, 10 178, 15 200 C 24 194, 30 184, 32 176 Z" fill="url(#feath)" />
+              <path d="M32 150 C 48 156, 54 178, 49 200 C 40 194, 34 184, 32 176 Z" fill="url(#feath)" opacity=".92" />
+              <path d="M28 160l4 3 M26 170l6 3 M25 180l7 3" stroke="rgba(130,12,48,.45)" stroke-width="1" />
+              <path d="M36 160l-4 3 M38 170l-6 3 M39 180l-7 3" stroke="rgba(130,12,48,.45)" stroke-width="1" />
+            </g>
+            <!-- nock -->
+            <path d="M29 200 L32 205 L35 200" fill="none" stroke="#c9a25a" stroke-width="2" stroke-linecap="round"/>
+            <!-- invisible tip marker: JS measures it to land the head on the heart -->
+            <circle id="tip" cx="32" cy="9" r="0.6" fill="none" />
+          </svg>
+      </div>
 
-            if (currentStep === 1) {
-                document.getElementById('screen-math').classList.remove('hidden');
-            } else if (currentStep === 3) {
-                document.getElementById('screen-q2').classList.remove('hidden');
-            }
-        }
+      <p class="hero__hint" id="hint">pull &amp; release</p>
+    </section>
 
-        function checkMath() {
-            const val = parseInt(document.getElementById('math-answer').value);
-            const feedback = document.getElementById('math-feedback');
+    <!-- ACT 2 — THE FLOOD -----------------------------------------------------
+         The heart bursts into this circle at its landing point, and it swallows
+         the frame in rose. Same trick as the intro dot: no cross-fade anywhere,
+         the colour just arrives. -->
+    <div class="flood" id="flood" aria-hidden="true"></div>
 
-            if (val === CONFIG.mathAnswer) {
-                feedback.style.color = "green";
-                feedback.innerText = "Correct! ✨";
+    <!-- ACT 3 — THE WISH (kinetic type on the flood) --------------------------
+         Lives inside the flood's own colour, revealed by it. Every glyph hinges
+         up out of its mask — nothing fades. -->
+    <div class="field" id="field" aria-hidden="true">
+      <div class="blob blob--1"></div>
+      <div class="blob blob--2"></div>
+      <div class="blob blob--3"></div>
+      <div class="fgrid" id="fgrid"></div>
+      <div class="fvignette"></div>
 
-                setTimeout(() => {
-                    triggerMassiveHearts(() => {
-                        hideAllScreens();
-                        currentStep = 2;
-                        document.getElementById('screen-math-msg').classList.remove('hidden');
-                    });
-                }, 600);
-            } else {
-                feedback.style.color = "red";
-                feedback.innerText = "Wrong answer, try again! 😡";
-            }
-        }
+      <div class="camera" id="camera">
+        <p class="kEyebrow" id="kEyebrow">make a wish&hellip;</p>
+        <h2 class="headline" id="headline">
+          <span class="hl__line"><span class="mask"><span class="hl__word" id="wLine1">Happy</span></span></span>
+          <span class="hl__line"><span class="mask"><span class="hl__word" id="wLine2">Birthday</span></span></span>
+        </h2>
+        <svg class="uline" id="uline" viewBox="0 0 300 26" fill="none" aria-hidden="true">
+          <path class="uline__path" d="M8 16C56 7 132 4 178 6c30 1 78 5 114 12-40 3-108 4-176 3"
+                stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <p class="kSub" id="kSub">to someone worth celebrating</p>
+      </div>
 
-        function checkQ2() {
-            const val = parseInt(document.getElementById('q2-answer').value);
-            const feedback = document.getElementById('q2-feedback');
+      <div class="bar bar--top" id="barTop"></div>
+      <div class="bar bar--bot" id="barBot"></div>
+    </div>
 
-            if (val === CONFIG.q2Answer) {
-                triggerMassiveHearts(() => {
-                    hideAllScreens();
-                    document.getElementById('screen-msg2').classList.remove('hidden');
-                });
-            } else {
-                feedback.style.color = "red";
-                feedback.innerText = "rakzy ya shamshon 😡";
-            }
-        }
+    <!-- The gold light that bridges the rose wish into the dawn of the tree. -->
+    <div class="bloom" id="bloom" aria-hidden="true"></div>
 
-        function startPuzzlePhase(index) {
-            currentPuzzleIndex = index - 1;
+    <!-- ACT 4 — THE HAND-LETTERED WISH (over the tree) ------------------------ -->
+    <div class="wish" id="wish" aria-hidden="true">
+      <p class="wish__eyebrow" id="wEyebrow">and&hellip; make it count</p>
+      <div class="wish__heroWrap"><h1 class="wish__hero" id="wHero">Happy Birthday</h1></div>
+      <span class="wish__rule" id="wRule"></span>
+      <p class="wish__sub" id="wSub">here&rsquo;s to a year that blooms</p><p class="personal-message" id="personal-message"></p>
+    </div>
 
-            if (currentPuzzleIndex >= CONFIG.puzzleImages.length) {
-                triggerMassiveHearts(() => {
-                    hideAllScreens();
-                    document.getElementById('game-container').classList.add('final-screen-container');
-                    document.getElementById('screen-final').classList.remove('hidden');
+    <!-- Play the film again once it has settled. -->
+    <button class="replay" id="replay" type="button" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15">
+        <path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" fill="currentColor" />
+      </svg>
+      Again
+    </button>
 
-                    const msgBox = document.getElementById('final-msg-box');
-                    msgBox.classList.add('show');
-
-                    setTimeout(() => {
-                        playBirthdayTypingEffect();
-                    }, 600);
-                });
-                return;
-            }
-
-            triggerMassiveHearts(() => {
-                hideAllScreens();
-                document.getElementById('screen-puzzle').classList.remove('hidden');
-                document.getElementById('puzzle-title').innerText = `Puzzle Stage (${currentPuzzleIndex + 1})`;
-                document.getElementById('puzzle-feedback').innerText = "";
-                setupPuzzleBoard();
-            });
-        }
-
-        function playBirthdayTypingEffect() {
-            const textElement = document.getElementById('typed-bday-line');
-            textElement.innerHTML = "";
-
-            const text = "Happiest of Birthdays ❤️";
-            let i = 0;
-
-            function typeWriter() {
-                if (i < text.length) {
-                    textElement.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 90);
-                }
-            }
-
-            typeWriter();
-        }
-
-        function setupPuzzleBoard() {
-            const board = document.getElementById('puzzle-board');
-            board.innerHTML = "";
-
-            puzzlePiecesOrder = [...originalOrder];
-            puzzlePiecesOrder.sort(() => Math.random() - 0.5);
-
-            if (JSON.stringify(puzzlePiecesOrder) === JSON.stringify(originalOrder)) {
-                puzzlePiecesOrder.reverse();
-            }
-
-            const imgUrl = CONFIG.puzzleImages[currentPuzzleIndex];
-
-            puzzlePiecesOrder.forEach((pieceIndex, slotIndex) => {
-                const piece = document.createElement('div');
-                piece.className = 'puzzle-piece';
-                piece.dataset.slot = slotIndex;
-                piece.dataset.piece = pieceIndex;
-
-                const x = (pieceIndex % 3) * 110;
-                const y = Math.floor(pieceIndex / 3) * 110;
-
-                piece.style.backgroundImage = `url('${imgUrl}')`;
-                piece.style.backgroundPosition = `-${x}px -${y}px`;
-                piece.style.backgroundSize = '330px 330px';
-
-                piece.onclick = () => selectPiece(piece);
-                board.appendChild(piece);
-            });
-        }
-
-        let selectedPiece = null;
-
-        function selectPiece(piece) {
-            if (!selectedPiece) {
-                selectedPiece = piece;
-                piece.style.border = "2px dashed #ff6584";
-            } else {
-                let tempBg = selectedPiece.style.backgroundPosition;
-                let tempPieceVal = selectedPiece.dataset.piece;
-
-                selectedPiece.style.backgroundPosition = piece.style.backgroundPosition;
-                selectedPiece.dataset.piece = piece.dataset.piece;
-
-                piece.style.backgroundPosition = tempBg;
-                piece.dataset.piece = tempPieceVal;
-
-                selectedPiece.style.border = "1px solid #fff";
-                selectedPiece = null;
-            }
-        }
-
-        function checkPuzzle() {
-            const pieces = document.querySelectorAll('.puzzle-piece');
-            let isCorrect = true;
-
-            pieces.forEach(p => {
-                if (parseInt(p.dataset.slot) !== parseInt(p.dataset.piece)) {
-                    isCorrect = false;
-                }
-            });
-
-            const feedback = document.getElementById('puzzle-feedback');
-
-            if (isCorrect) {
-                feedback.style.color = "green";
-                feedback.innerText = "Great job! Puzzle solved 🎯";
-
-                setTimeout(() => {
-                    startPuzzlePhase(currentPuzzleIndex + 2);
-                }, 800);
-            } else {
-                feedback.style.color = "red";
-
-                let wrongMessages = [
-                    "tb graby tany tayb 😡",
-                    "ya shamshonnn 😡",
-                    "el sabr mn andk ya rb 😡"
-                ];
-
-                feedback.innerText = wrongMessages[currentPuzzleIndex];
-            }
-        }
-    </script>
-</body>
-</html>
+    <!-- One lens over the whole film: vignette + fine grain. -->
+    <div class="grade" aria-hidden="true">
+      <div class="grade__vignette"></div>
+      <div class="grade__grain"></div>
+    </div>
+  </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script><script src="./birthday.js"></script><script src="./game.js"></script></body></html>

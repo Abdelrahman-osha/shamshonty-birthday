@@ -1,0 +1,43 @@
+
+#game-layer {
+ position:fixed; inset:0; z-index:20; display:grid; place-items:center;
+ overflow:auto; padding:20px;
+ background:linear-gradient(135deg,#ff9aef 0%,#fad0c4 50%,#a1c4fd 100%);
+ background-size:400% 400%; animation:legacyGradientBG 15s ease infinite;
+ transition:opacity .8s ease,transform .8s ease;
+ font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; color:#2d3436;
+}
+@keyframes legacyGradientBG {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+#game-layer.leaving{opacity:0;transform:scale(1.025);pointer-events:none}
+#game-layer .container{background:rgba(255,255,255,.9)!important;backdrop-filter:blur(12px);padding:40px!important;border-radius:25px!important;box-shadow:0 15px 35px rgba(0,0,0,.2)!important;text-align:center;max-width:650px;width:90%;border:2px solid rgba(255,255,255,.6)!important;position:relative;z-index:10;transition:opacity .4s ease,transform .4s ease}
+#game-layer .container.final-screen-container{max-width:950px!important;padding:40px!important}
+#game-layer h1{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:#d63031;letter-spacing:normal;font-size:2.2rem;margin-bottom:20px}
+#game-layer p{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:1.2rem;line-height:1.8;color:#2d3436;font-weight:600}
+#game-layer .special-highlight-text{font-family:'Cairo',sans-serif!important;font-weight:900!important;font-size:1.5rem!important;color:#d63031!important;line-height:1.7!important;margin:15px 0;text-shadow:1px 1px 2px rgba(0,0,0,.1)}
+#game-layer .login-note-box{background:rgba(255,105,180,.12);border:2px dashed #ff6584;padding:12px 15px;border-radius:15px;margin-bottom:20px;font-family:'Cairo',sans-serif;font-weight:900;font-size:1.05rem;color:#d63031;box-shadow:0 4px 10px rgba(0,0,0,.05)}
+#game-layer input[type="text"],#game-layer input[type="password"],#game-layer input[type="number"]{padding:12px 20px;font-size:1.1rem;border:2px solid #a29bfe;border-radius:12px;margin-top:15px;width:70%;outline:none;text-align:center}
+#game-layer button{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;letter-spacing:normal;background:linear-gradient(135deg,#e84393,#6c5ce7)!important;color:white;border:0;padding:12px 30px;font-size:1.1rem;font-weight:bold;border-radius:25px;cursor:pointer;margin-top:20px;box-shadow:0 5px 15px rgba(108,92,231,.4)!important;transition:all .3s ease}
+#game-layer button:hover{transform:translateY(-2px);filter:none;box-shadow:0 8px 20px rgba(232,67,147,.6)!important}
+#game-layer .hidden{display:none!important}
+#game-layer .img-preview{max-width:100%;max-height:250px;border-radius:15px;margin:15px 0;box-shadow:0 5px 15px rgba(0,0,0,.1)}
+#game-layer .puzzle-board{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;width:330px;height:330px;margin:20px auto;background:#dfe6e9;box-shadow:none;padding:4px;border-radius:10px}
+#game-layer .puzzle-piece{background-size:330px 330px;cursor:pointer;border:1px solid #fff;border-radius:4px;transition:transform .2s}
+#game-layer .puzzle-piece:hover{transform:scale(.96)}
+#game-layer .feedback{margin-top:15px;font-weight:bold;font-size:1.1rem}
+#game-layer .typing-birthday-line{font-family:'Pacifico',cursive;font-size:2.3rem;color:#e84393;margin-bottom:20px;text-shadow:2px 2px 4px rgba(0,0,0,.1);min-height:50px;display:block}
+#game-layer .final-message-box{background:rgba(255,255,255,.92);padding:35px;border-radius:25px;box-shadow:0 15px 35px rgba(0,0,0,.15);border:3px solid rgba(255,105,180,.4);opacity:0;transform:scale(.7) translateY(30px);transition:all 1s cubic-bezier(.175,.885,.32,1.275)}
+#game-layer .final-message-box.show{opacity:1;transform:scale(1) translateY(0)}
+.massive-floating-heart{position:fixed;top:0;color:#ff4757;font-size:2.5rem;user-select:none;pointer-events:none;z-index:9999;animation:massivePopAndFall 1.6s ease-in-out forwards;will-change:transform,opacity;text-shadow:0 4px 12px rgba(255,71,87,.22)}
+@keyframes massivePopAndFall{0%{transform:translateY(105vh) scale(.3);opacity:0}35%{transform:translateY(20vh) scale(1.6);opacity:1}70%{transform:translateY(40vh) scale(1.3);opacity:1}100%{transform:translateY(110vh) scale(.9);opacity:0}}
+#game-layer .hidden{display:none!important}
+.film-scene{visibility:hidden;opacity:0;pointer-events:none;z-index:30;transition:opacity .8s ease}
+.film-scene.is-active{visibility:visible;opacity:1;pointer-events:auto}
+.personal-message{font-family:'Cormorant Garamond',Georgia,serif!important;font-size:clamp(24px,3.2vw,34px)!important;font-weight:700!important;line-height:1.5!important;letter-spacing:.015em;color:#6e3f4a!important;max-width:760px;margin:18px auto 0;min-height:3.5em;text-shadow:0 1px 3px rgba(255,255,255,.9)}
+.wish{left:50%!important;bottom:6%!important;transform:translateX(-50%);width:min(900px,88vw);max-width:88%!important;text-align:center}
+.wish::before{inset:-25% -10% -22% -10%!important;background:radial-gradient(84% 98% at 50% 52%,rgba(255,250,243,.95),rgba(255,250,243,.68) 50%,rgba(255,250,243,0) 82%)!important}
+.wish__rule{margin-left:auto!important;margin-right:auto!important;background:linear-gradient(90deg,transparent,#e8a23d,transparent)!important}
+.replay{z-index:40!important;right:18px!important;bottom:16px!important}
+@media(max-width:600px){#game-layer{padding:12px}#game-layer .container{padding:24px 18px!important}.wish{bottom:8%!important;width:90vw;max-width:90%!important}.wish__hero{font-size:clamp(36px,10vw,60px)!important}.personal-message{font-size:clamp(21px,5vw,26px)!important;line-height:1.4!important;font-weight:700!important}.wish__eyebrow,.wish__sub{font-size:13px!important}.puzzle-board{gap:3px!important}}
+
+/* Keep the birthday film's title out of the final tree scene; the personal message is the ending. */
+#film-scene .wish__hero{display:none!important}
